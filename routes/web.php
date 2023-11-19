@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,7 @@ Route::get('test', function(){
 });
 
 Route::get('user/{name}', function($name){
-    return 'The user name is'. $name;
+    return 'The user name is '. $name;
 });
 
 // Route::get('user/{name}/{age}', function($name, $age){
@@ -92,3 +95,25 @@ Route::prefix('training')->group(function(){
         return 'logistics page';
     });
 });
+
+// Route::fallback(function($name="lamia"){
+//     return redirect('user/'.$name);
+// });
+
+Route::get('cv', function(){
+    return view('cv');
+});
+
+// Route::get('login', function(){
+//     return view('login');
+// });
+
+Route::get('test1',[ExampleController::class, 'test1']);
+
+Route::post('home', function(){
+    return 'you logged in';
+})->name('home');
+
+Route::get('car', [CarController::class, 'viewAddCarForm']);
+
+Route::post('car-data', [CarController::class, 'viewCarData'])->name('car-data');
