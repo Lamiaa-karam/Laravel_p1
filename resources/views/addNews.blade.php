@@ -11,20 +11,20 @@
 <body>
 
 <div class="container">
-  <h2>Add Car</h2>
-  <form action="{{route('storeCar')}}" method="POST">
+  <h2>Add News</h2>
+  <form action="{{route('storeNews')}}" method="POST">
     @csrf
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
     </div>
     <div class="form-group">
-      <label for="price">Price:</label>
-      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price">
+      <label for="content">Content:</label>
+      <input type="text" class="form-control" id="content" placeholder="Enter content" name="content">
     </div>
     <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+        <label for="author">author:</label>
+        <input type="text" class="form-control" id="author" name="author">
       </div> 
     <div class="checkbox">
       <label><input type="checkbox" name="published"> Published</label>

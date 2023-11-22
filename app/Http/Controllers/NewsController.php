@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
-use App\Models\Car;
 
-class CarController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,37 +20,26 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view("addCar");
+        return view("addNews");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store()
-    // {
-    //     $cars = new Car;
-    //     $cars->carTitle = "BMW";
-    //     $cars->description = "the discreption";
-    //     $cars->published = true;
-    //     $cars->save();
-    //     return 'data is saved';
-    // }
-
     public function store(Request $request)
     {
-        $cars = new Car;
-        $cars = new Car;
-        $cars->carTitle = $request['title'];
-        $cars->description = $request['description'];
-       if(isset($request['published'])){
-        $cars->published = true;
-       }
-       else{
-        $cars->published = false;
-       }
-        $cars->save();
-        return "data is saved".  $request['published'];
-
+        $news = new News;
+        $news->newsTitle = $request['title'];
+        $news->content = $request['content'];
+        $news->author = $request['author'];
+        if(isset($request['published'])){
+            $news->published = true;
+        }
+        else{
+            $news->published = false;
+        }
+        $news->save();
+        return 'news are stored';
     }
 
     /**

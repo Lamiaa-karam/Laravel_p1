@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 
@@ -114,6 +115,12 @@ Route::post('home', function(){
     return 'you logged in';
 })->name('home');
 
-Route::get('car', [CarController::class, 'viewAddCarForm']);
+Route::get('addCar', [CarController::class, 'create']);
 
-Route::post('car-data', [CarController::class, 'viewCarData'])->name('car-data');
+// Route::post('car-data', [ExampleController::class, 'viewCarData'])->name('car-data');
+
+Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
+
+Route::get('addNews', [NewsController::class, 'create']);
+
+Route::post('storeNews', [NewsController::class, 'store'])->name('storeNews');
