@@ -12,7 +12,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::all();
+        return view('News',['news' => $news]);
     }
 
     /**
@@ -55,7 +56,7 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       $news = News::find($id);        
     }
 
     /**
@@ -63,7 +64,10 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        News::where('id', $request->id)->update(
+            ['title' => $request->newsTitle,'content'=> $request->content ,'author'=>$request->author, 'published'=>$request->published]);
+            return $this->index();
+        
     }
 
     /**

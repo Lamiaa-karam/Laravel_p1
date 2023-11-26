@@ -124,3 +124,7 @@ Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
 Route::get('addNews', [NewsController::class, 'create']);
 
 Route::post('storeNews', [NewsController::class, 'store'])->name('storeNews');
+
+Route::get('News', [NewsController::class,'index']);
+
+Route::get('updateNews/{id}', [NewsController::class, 'update'])->name('updateNews');
