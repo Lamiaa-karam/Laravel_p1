@@ -119,7 +119,7 @@ Route::get('addCar', [CarController::class, 'create']);
 
 // Route::post('car-data', [ExampleController::class, 'viewCarData'])->name('car-data');
 
-Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
+Route::post('addCar', [CarController::class,'store'])->name('addCar');
 
 Route::get('addNews', [NewsController::class, 'create']);
 
@@ -129,9 +129,18 @@ Route::get('editCar/{id}', [CarController::class,'edit']);
 
 Route::put('updateCar/{id}', [CarController::class,'update'])->name('updateCar');
 
+Route::get("showCar/{id}", [CarController::class,"show"]);
+
 Route::get('news', [NewsController::class,'index']);
+
+Route::post('addNews', [NewsController::class, 'store'])->name('addNews');
 
 Route::get('editNews/{id}', [NewsController::class,'edit']);
 
 Route::put('updateNews/{id}', [NewsController::class,'update'])->name('updateNews');
+
+Route::get("showNews/{id}", [NewsController::class,"show"]);
+
+
+
 

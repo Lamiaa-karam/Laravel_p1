@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Car;
 
 class CarController extends Controller
 {
+    private $columns=['carTitle', 'description', 'published'];
     /**
      * Display a listing of the resource.
      */
@@ -37,20 +39,23 @@ class CarController extends Controller
     //     return 'data is saved';
     // }
 
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        $cars = new Car;
-        $cars = new Car;
-        $cars->carTitle = $request['title'];
-        $cars->description = $request['description'];
-       if(isset($request['published'])){
-        $cars->published = true;
-       }
-       else{
-        $cars->published = false;
-       }
-        $cars->save();
-        return "data is saved".  $request['published'];
+        Car::create($request->only($this->columns));
+        return redirect('cars');
+        
+    //     $cars = new Car;
+    //     $cars = new Car;
+    //     $cars->carTitle = $request['title'];
+    //     $cars->description = $request['description'];
+    //    if(isset($request['published'])){
+    //     $cars->published = true;
+    //    }
+    //    else{
+    //     $cars->published = false;
+    //    }
+    //     $cars->save();
+    //     return "data is saved".  $request['published'];
 
     }
 
@@ -59,7 +64,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $car = Car::findorfail($id);
+        return view('showCar', compact('car'));
     }
 
     /**
@@ -74,9 +80,11 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id):RedirectResponse
     {
-        //
+        Car::where('id', $id)->update($request->only($this->columns));
+        return redirect('cars');
+
     }
 
     /**

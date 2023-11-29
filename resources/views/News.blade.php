@@ -6,6 +6,7 @@
             <td>{{$data->author}}</td>
             <td>{{$data->published}}</td>
             <td><a href="editNews/{{$data->id}}">Edit</a></td>
+            <td><a href="showNews/{{$data->id}}">show</a></td>
         </tr>
     @endforeach
 </table>

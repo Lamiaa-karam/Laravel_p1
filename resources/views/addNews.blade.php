@@ -12,11 +12,11 @@
 
 <div class="container">
   <h2>Add News</h2>
-  <form action="{{route('storeNews')}}" method="POST">
+  <form action="{{route('addNews')}}" method="POST">
     @csrf
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+      <input type="text" class="form-control" id="newsTitle" placeholder="Enter title" name="newsTitle">
     </div>
     <div class="form-group">
       <label for="content">Content:</label>

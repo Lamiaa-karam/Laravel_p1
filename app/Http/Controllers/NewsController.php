@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    private $columns=['newsTitle', 'content', 'author'];
     /**
      * Display a listing of the resource.
      */
@@ -29,18 +30,20 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $news = new News;
-        $news->newsTitle = $request['title'];
-        $news->content = $request['content'];
-        $news->author = $request['author'];
-        if(isset($request['published'])){
-            $news->published = true;
-        }
-        else{
-            $news->published = false;
-        }
-        $news->save();
-        return 'news are stored';
+        News::create($request->only($this->columns));
+        return redirect('news');
+        // $news = new News;
+        // $news->newsTitle = $request['title'];
+        // $news->content = $request['content'];
+        // $news->author = $request['author'];
+        // if(isset($request['published'])){
+        //     $news->published = true;
+        // }
+        // else{
+        //     $news->published = false;
+        // }
+        // $news->save();
+        // return 'news are stored';
     }
 
     /**
@@ -48,7 +51,8 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $news = News::findorfail($id);
+        return view('showNews', compact('news'));
     }
 
     /**
@@ -65,9 +69,10 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        News::where('id', $request->id)->update(
-            ['title' => $request->newsTitle,'content'=> $request->content ,'author'=>$request->author, 'published'=>$request->published]);
-            return $this->index();
+        $news = $request->only($this->columns);
+        $news['published'] = isset($news['published'])?true:false;
+        News::where('id', $id)->update($news);
+        return redirect('news');
         
     }
 
