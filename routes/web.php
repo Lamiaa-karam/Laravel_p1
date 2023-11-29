@@ -123,8 +123,15 @@ Route::post('storeCar', [CarController::class, 'store'])->name('storeCar');
 
 Route::get('addNews', [NewsController::class, 'create']);
 
-Route::post('storeNews', [NewsController::class, 'store'])->name('storeNews');
+Route::get('cars', [CarController::class,'index']);
 
-Route::get('News', [NewsController::class,'index']);
+Route::get('editCar/{id}', [CarController::class,'edit']);
 
-Route::get('updateNews/{id}', [NewsController::class, 'update'])->name('updateNews');
+Route::put('updateCar/{id}', [CarController::class,'update'])->name('updateCar');
+
+Route::get('news', [NewsController::class,'index']);
+
+Route::get('editNews/{id}', [NewsController::class,'edit']);
+
+Route::put('updateNews/{id}', [NewsController::class,'update'])->name('updateNews');
+

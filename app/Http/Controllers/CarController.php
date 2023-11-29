@@ -12,7 +12,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car::get();
+        return view("cars", compact("cars"));
     }
 
     /**
@@ -66,7 +67,8 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $car = Car::findorfail($id);
+        return view('updateCar', compact('car'));
     }
 
     /**
