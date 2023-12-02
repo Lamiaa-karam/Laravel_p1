@@ -21,14 +21,14 @@
     </div>
     <div class="form-group">
       <label for="content">Content:</label>
-      <input type="text" class="form-control" id="content" placeholder="Enter content" name="content" value="{{$news->content}}">
+      <textarea type="text" class="form-control" id="content" placeholder="Enter content" name="content">{{$news->content}}</textarea>
     </div>
     <div class="form-group">
         <label for="author">author:</label>
         <input type="text" class="form-control" id="author" name="author" value="{{$news->author}}">
       </div> 
     <div class="checkbox">
-      <label><input type="checkbox" name="published" {{ $news->published ? 'checked' : '' }}>Published</label>
+      <label><input type="checkbox" name="published" {{ $news->published? 'checked' : '' }}>Published</label>
     </div>
     <button type="submit" class="btn btn-default">Update</button>
   </form>

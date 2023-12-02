@@ -41,7 +41,12 @@ class CarController extends Controller
 
     public function store(Request $request):RedirectResponse
     {
-        Car::create($request->only($this->columns));
+        $request->validate(['carTitle' => 'required|string|max:50',
+        'description' => 'required|string|max:100']);
+        
+        $car = $request->only($this->columns);
+        $car['published'] = isset($car['published'])?true:false;
+        Car::create($car);
         return redirect('cars');
         
     //     $cars = new Car;
@@ -82,16 +87,36 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id):RedirectResponse
     {
-        Car::where('id', $id)->update($request->only($this->columns));
+        $car = $request->only($this->columns);
+        $car['published'] = isset($car['published'])?true:false;
+        Car::where('id', $id)->update($car);
         return redirect('cars');
-
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
+    { 
+        Car::where('id', $id)->forceDelete();
+        return redirect('trashedCars'); 
+    }
+
+    public function trashed()
     {
-        //
+        $cars = Car::onlyTrashed()->get();
+        return view('trashedCars', compact('cars'));
+    }
+
+    public function restore(string $id):RedirectResponse
+    {
+        Car::where('id', $id)->restore();
+        return redirect('cars');        
+    }
+
+    public function delete(string $id):RedirectResponse
+    {
+        Car::where('id', $id)->delete();
+        return redirect('cars');
     }
 }

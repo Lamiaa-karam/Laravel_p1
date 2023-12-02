@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('carTitle');
             $table->string('description');
             $table->boolean('published');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

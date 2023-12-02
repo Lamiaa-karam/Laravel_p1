@@ -131,6 +131,14 @@ Route::put('updateCar/{id}', [CarController::class,'update'])->name('updateCar')
 
 Route::get("showCar/{id}", [CarController::class,"show"]);
 
+Route::get("deleteCar/{id}", [CarController::class,"delete"]);
+
+Route::get("trashedCars", [CarController::class,"trashed"]);
+
+Route::get("restoreCar/{id}", [CarController::class,"restore"]);
+
+Route::get("destroyCar/{id}", [CarController::class,"destroy"]);
+
 Route::get('news', [NewsController::class,'index']);
 
 Route::post('addNews', [NewsController::class, 'store'])->name('addNews');
@@ -141,6 +149,13 @@ Route::put('updateNews/{id}', [NewsController::class,'update'])->name('updateNew
 
 Route::get("showNews/{id}", [NewsController::class,"show"]);
 
+Route::get("deleteNews/{id}", [NewsController::class,"delete"]);
+
+Route::get("trashedNews", [NewsController::class,"trashed"]);
+
+Route::get("restoreNews/{id}", [NewsController::class,"restore"]);
+
+Route::get("destroyNews/{id}", [NewsController::class,"destroy"]);
 
 
 
