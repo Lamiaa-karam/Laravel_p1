@@ -12,6 +12,7 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Image</th>
                 <th>Published</th>
                 <th>Edit</th>
                 <th>View</th>
@@ -23,6 +24,7 @@
                 <tr>
                     <td>{{$car->carTitle}}</td>
                     <td>{{$car->description}}</td>
+                    <td>{{$car->image}}</td>
                     <td>@if ($car->published)
                         yes
                     @else

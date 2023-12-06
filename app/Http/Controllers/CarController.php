@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
+use App\Models\ModelName;
 
 class CarController extends Controller
 {
+    use Common;
     private $columns=['carTitle', 'description', 'published'];
     /**
      * Display a listing of the resource.
@@ -41,12 +44,20 @@ class CarController extends Controller
 
     public function store(Request $request):RedirectResponse
     {
-        $request->validate(['carTitle' => 'required|string|max:50',
-        'description' => 'required|string|max:100']);
-        
-        $car = $request->only($this->columns);
-        $car['published'] = isset($car['published'])?true:false;
-        Car::create($car);
+        $messages = ['carTitle.required' => 'title is required',
+        'carTitle.string' => 'title must be string',
+        'carTitle.max' => 'title string must be less than 50 in length',
+        'description.required' => 'description is required',
+        'description.string' => 'description must be string',
+        'description.discription' => 'the discription string must be less than 50 in length'
+    ];
+        $data = $request->validate(['carTitle' => 'required|string|max:50',
+        'description' => 'required|string|max:100', 'price' => 'required',
+        'image' => 'required|mimes:png,jpg,jpeg|max:7000'], $messages);
+
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');        
+        $data['published'] = isset($request['published']);
+        Car::create($data);
         return redirect('cars');
         
     //     $cars = new Car;
@@ -87,9 +98,28 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id):RedirectResponse
     {
-        $car = $request->only($this->columns);
-        $car['published'] = isset($car['published'])?true:false;
-        Car::where('id', $id)->update($car);
+        // $car = $request->only($this->columns);
+        $messages = ['carTitle.required' => 'title field is required',
+        'carTitle.string' => 'title must be string',
+        'carTitle.max' => 'title string must be less than 50 in length',
+        'description.required' => 'description is required',
+        'description.string' => 'description must be string',
+        'description.discription' => 'the discription string must be less than 50 in length',
+        'image.mimes'=> 'image type must be jpg, jpeg, or png'];
+
+        $data = $request->validate(['carTitle' => 'required|string|max:50',
+        'description' => 'required|string|max:100',
+        'image' => 'mimes:png,jpg,jpeg|max:7000'], $messages);
+
+        if(isset($request->image))
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');        
+        
+        else{
+            $car = Car::findorfail($id);
+            $data['image'] = $car['image'];}
+
+        $data['published'] = isset($request['published']);
+        Car::where('id', $id)->update($data);
         return redirect('cars');
     }
 

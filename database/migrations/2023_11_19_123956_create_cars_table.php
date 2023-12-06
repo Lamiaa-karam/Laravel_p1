@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('carTitle');
+            $table->string('carTitle', 100);
             $table->string('description');
+            $table->string('image', 100);
             $table->boolean('published');
             $table->softDeletes();
             $table->timestamps();

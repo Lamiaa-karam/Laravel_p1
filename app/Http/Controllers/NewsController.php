@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    private $columns=['newsTitle', 'content', 'author', 'published'];
+    // private $columns=['newsTitle', 'content', 'author'];
     /**
      * Display a listing of the resource.
      */
@@ -31,11 +31,19 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['newsTitle' => 'required|string|max:50', 'content' => 'required|string|max:200',
-        'author' => 'required|string']);
-        $news = $request->only($this->columns);
-        $news['published'] = isset($news['published'])?true:false;
-        News::create($news);
+        $messages = ['newsTitle.required' => 'title field is required',
+        'newsTitle.string' => 'title must be a string',
+         'newsTitle.max' => 'title must be less than 50 in length',
+         'content.required' => 'content field is required',
+        'content.string' => 'content must be a string',
+         'content.max' => 'content must be less than 200 in length',
+         'author.required' => 'author field is required',
+        'author.string' => 'author must be a string'      
+    ];
+        $data = $request->validate(['newsTitle' => 'required|string|max:50', 'content' => 'required|string|max:200',
+        'author' => 'required|string'], $messages);
+        $data['published'] = isset($request['published']);
+        News::create($data);
         return redirect('news');
         // $news = new News;
         // $news->newsTitle = $request['title'];
