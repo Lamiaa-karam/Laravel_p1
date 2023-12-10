@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\placeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 
@@ -140,5 +141,8 @@ Route::get("trashedNews", [NewsController::class,"trashed"]);
 Route::get("restoreNews/{id}", [NewsController::class,"restore"]);
 Route::get("destroyNews/{id}", [NewsController::class,"destroy"]);
 
-
-
+Route::get("addPlace", [placeController::class,"create"]);
+Route::post("addPlace", [placeController::class,"store"])->name('addPlace');
+Route::get('place',[placeController::class,'place']);
+Route::get('blog',[placeController::class,'blog']);
+Route::get('blog1',[placeController::class,'blog1']);
