@@ -89,7 +89,7 @@
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
-									<img src="{{$row['image']}}" alt="explore image">
+									<img src="{{asset('assets/images/explore/'.$row["image"])}}" alt="explore image">
 									<div class="single-explore-img-info">
 										<button onclick="window.location.href='#'">best rated</button>
 										<div class="single-explore-image-icon-box">
