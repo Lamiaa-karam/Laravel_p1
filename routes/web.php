@@ -146,3 +146,5 @@ Route::post("addPlace", [placeController::class,"store"])->name('addPlace');
 Route::get('place',[placeController::class,'place']);
 Route::get('blog',[placeController::class,'blog']);
 Route::get('blog1',[placeController::class,'blog1']);
+Route::get('places',[placeController::class,'index']);
+Route::get('deletePlace/{id}',[placeController::class,'delete']);

@@ -15,7 +15,8 @@ class placeController extends Controller
      */
     public function index()
     {
-        //
+        $places = Place::get();
+        return view("places", compact("places"));
     }
 
     /**
@@ -29,7 +30,7 @@ class placeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
         $messages = $this->messages();
         $data = $request->validate(['imageTitle'=>'required|string|max:100',
@@ -39,8 +40,8 @@ class placeController extends Controller
 
     $data['image'] = $this->uploadFile($request->image, 'assets/images/upload');        
     Place::create($data);
-    $rows = Place::orderBy('id', 'asc')->take(6)->get();
-    return view('place', compact("rows"));
+    // $rows = Place::orderBy('id', 'asc')->take(6)->get();
+    return redirect('place');
     }
 
     /**
@@ -67,6 +68,15 @@ class placeController extends Controller
         //
     }
 
+     /**
+     * softDelete
+     */
+    public function delete(string $id):RedirectResponse
+    {
+        Place::where('id', $id)->delete();
+        return redirect('places');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -89,7 +99,7 @@ class placeController extends Controller
     }
 
     public function place(){
-        $rows = Place::orderBy('id', 'asc')->take(6)->get();
+        $rows = $this->getLast6Rows();
         return view('place', compact("rows"));
     }
 
@@ -101,5 +111,8 @@ class placeController extends Controller
         return view('blog1');
     }
 
-  
-}
+    public function getLast6Rows(){
+        $rows = Place::orderBy('id', 'asc')->take(6)->get();
+        return $rows;
+    }
+}   
