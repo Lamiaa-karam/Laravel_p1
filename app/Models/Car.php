@@ -11,8 +11,15 @@ class Car extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         "carTitle",
+        "price",
         "description",
+        "category_id",
         "image",
-        "published"
+        "published",
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+        }
+        
 }

@@ -36,6 +36,17 @@
       @enderror
       </div> 
       <div class="form-group">
+        <select name="category_id" id="category">
+            <option value="">select categor</option>
+            @foreach ($categories as $category)
+                <option value="{{$category -> id}}">{{$category -> categoryName}}</option>
+            @endforeach
+        </select>
+        @error('category_id')
+        <div class="alert alert-warning">{{$message}}</div>
+         @enderror
+      </div>   
+      <div class="form-group">
         <label for="image">Image:</label>
         <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}">
         @error('image')

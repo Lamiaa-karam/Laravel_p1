@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Car;
@@ -26,7 +27,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view("addCar");
+        $categories = Category::select('id', 'categoryName')->get();
+        return view("addCar", compact('categories'));
     }
 
     /**
@@ -46,7 +48,7 @@ class CarController extends Controller
     {
         $messages = $this->messages();
         $data = $request->validate(['carTitle' => 'required|string|max:50',
-        'description' => 'required|string|max:100', 'price' => 'required',
+        'description' => 'required|string|max:100', 'price' => 'required','category_id' => 'required',
         'image' => 'required|mimes:png,jpg,jpeg|max:7000'], $messages);
 
         $data['image'] = $this->uploadFile($request->image, 'assets/images/upload');        
@@ -84,7 +86,8 @@ class CarController extends Controller
     public function edit(string $id)
     {
         $car = Car::findorfail($id);
-        return view('updateCar', compact('car'));
+        $categories = Category::select('id', 'categoryName')->get();
+        return view('updateCar', compact('car', 'categories'));
     }
 
     /**
@@ -96,6 +99,8 @@ class CarController extends Controller
         $messages = $this->messages();
 
         $data = $request->validate(['carTitle' => 'required|string|max:50',
+        'price' => 'required',
+        'category_id' => 'required',
         'description' => 'required|string|max:100',
         'image' => 'sometimes|mimes:png,jpg,jpeg|max:7000'], $messages);
 
@@ -149,6 +154,7 @@ class CarController extends Controller
         'description.required' => 'description is required',
         'description.string' => 'description must be string',
         'description.discription' => 'the discription string must be less than 50 in length',
+        'category_id.required' => 'category field is required',
         'image.mimes'=> 'image type must be jpg, jpeg, or png'];
         return $messages;
     }

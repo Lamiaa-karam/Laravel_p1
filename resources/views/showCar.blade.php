@@ -11,6 +11,7 @@
         <tr><td>car title: {{$car->carTitle}}</td></tr>        
         <tr><td>description: {{$car->description}}</td></tr>
         <tr><td>published: {{$car->published}}</td></tr>
+        <tr><td>Category: {{$car->category->categoryName}}</td></tr>
     </table>
 </body>
 </html>

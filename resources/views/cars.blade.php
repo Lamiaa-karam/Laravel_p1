@@ -11,7 +11,9 @@
         <thead class="thead-dark">
             <tr>
                 <th>Title</th>
+                <th>Price</th>
                 <th>Description</th>
+                <th>category</th>
                 <th>Image</th>
                 <th>Published</th>
                 <th>Edit</th>
@@ -23,7 +25,9 @@
             @foreach ($cars as $car)
                 <tr>
                     <td>{{$car->carTitle}}</td>
+                    <td>{{$car->price}}</td>
                     <td>{{$car->description}}</td>
+                    <td>{{$car->category->categoryName}}</td>
                     <td>{{$car->image}}</td>
                     <td>@if ($car->published)
                         yes
