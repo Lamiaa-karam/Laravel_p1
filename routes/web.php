@@ -106,9 +106,10 @@ Route::get('cv', function(){
     return view('cv');
 });
 
-Route::post('home', function(){
-    return 'you logged in';
-})->name('home');
+
+// Route::post('home', function(){
+//     return 'you logged in';
+// })->name('home');
 
 // Route::get('login', function(){
 //     return view('login');
@@ -148,3 +149,11 @@ Route::get('blog',[placeController::class,'blog']);
 Route::get('blog1',[placeController::class,'blog1']);
 Route::get('places',[placeController::class,'index']);
 Route::get('deletePlace/{id}',[placeController::class,'delete']);
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/contact', [App\Http\Controllers\ContactMailController::class, 'viewContact'])->name('contact.show');
+Route::post('/contact', [App\Http\Controllers\ContactMailController::class, 'send'])->name('contact.send');
+
+
