@@ -15,14 +15,20 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{asset('assets/contactForm/css/style.css')}}">
 
-    <title>Contact Us Form</title>
+    <title>{{__('messages.contactForm')}}</title>
   </head>
   <body>
+    <div>
+     <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+     <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+     
+    </div>
   
 
   <div class="content">
     
     <div class="container">
+      <h1>{{__('messages.contactForm')}}</h1>
       <div class="row justify-content-center">
         <div class="col-md-10">
           

@@ -123,7 +123,7 @@ Route::post('upload',[ExampleController::class,'uploadImage'])->name('upload');
 Route::get('addCar', [CarController::class, 'create']);
 Route::post('addCar', [CarController::class,'store'])->name('addCar');
 Route::get('addNews', [NewsController::class, 'create']);
-Route::get('cars', [CarController::class,'index']);
+Route::get('cars', [CarController::class,'index'])->middleware('verified')->name('cars');
 Route::get('editCar/{id}', [CarController::class,'edit']);
 Route::put('updateCar/{id}', [CarController::class,'update'])->name('updateCar');
 Route::get("showCar/{id}", [CarController::class,"show"]);
@@ -153,7 +153,13 @@ Route::get('deletePlace/{id}',[placeController::class,'delete']);
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/contact', [App\Http\Controllers\ContactMailController::class, 'viewContact'])->name('contact.show');
-Route::post('/contact', [App\Http\Controllers\ContactMailController::class, 'send'])->name('contact.send');
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){Route::get('/contact', [App\Http\Controllers\ContactMailController::class, 'viewContact'])->name('contact.show');
+        Route::post('/contact', [App\Http\Controllers\ContactMailController::class, 'send'])->name('contact.send');
+        Route::get('addCar', [CarController::class, 'create']);
+    });
 
