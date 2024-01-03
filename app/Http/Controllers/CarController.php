@@ -148,14 +148,14 @@ class CarController extends Controller
     }
 
     public function messages(){
-        $messages = ['carTitle.required' => "__('messages.carTitle.required')",
-        'carTitle.string' => "__('messages.carTitle.string')",
-        'carTitle.max' => "__('messages.carTitle.max')",
-        'description.required' => "__('messages.description.required')",
-        'description.string' => "__('messages.description.string')",
-        'description.discription' => "__('messages.description.discription')",
-        'category_id.required' => "__('messages.category_id.required')",
-        'image.mimes'=> "__('messages.image.mimes')"];
+        $messages = ['carTitle.required' => __('messages.carTitle.required'),
+        'carTitle.string' => __('messages.carTitle.string'),
+        'carTitle.max' => __('messages.carTitle.max'),
+        'description.required' => __('messages.description.required'),
+        'description.string' => __('messages.description.string'),
+        'description.discription' => __('messages.description.discription'),
+        'category_id.required' => __('messages.category_id.required'),
+        'image.mimes'=> __('messages.image.mimes')];
         return $messages;
     }
 }

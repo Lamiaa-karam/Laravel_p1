@@ -11,6 +11,11 @@
 <body>
 
 <div class="container">
+  <div>
+    <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+    <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+    
+   </div>
   <h2>{{__('messages.header')}}</h2>
   <form action="{{route('addCar')}}" method="POST" enctype="multipart/form-data">
     @csrf

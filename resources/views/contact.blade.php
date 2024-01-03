@@ -18,16 +18,15 @@
     <title>{{__('messages.contactForm')}}</title>
   </head>
   <body>
-    <div>
-     <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
-     <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
-     
-    </div>
-  
 
   <div class="content">
     
     <div class="container">
+      <div>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+        
+       </div>
       <h1>{{__('messages.contactForm')}}</h1>
       <div class="row justify-content-center">
         <div class="col-md-10">

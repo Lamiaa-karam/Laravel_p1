@@ -17,7 +17,7 @@ return [
    'titlePlaceholder' => 'ادخل السيارة',
    'price' => ':السعر',
    'pricePlaceholder' => 'ادخل السعر',
-   'Description' => ':الوصف',
+   'description' => ':الوصف',
    'category' => 'اختر الفئة',
    'image' => ' :ادراج صورة',
    'published' => 'عام',
